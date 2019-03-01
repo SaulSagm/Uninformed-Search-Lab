@@ -4,15 +4,17 @@
 
 int main()
 {
-    int i,j;
+    int i,j,k=0;
     int lim,flag=1,rep=0;
     int x,y;
+    int cost=0;
     int a=0,b=0;
     int c=0,d=0;
     int e=0,f=0;
     int height,width;
     int row1=0,column1=0;
     int row2=0,column2=0;
+    int coord[20];
     char initial[20],goal[20];
     
     scanf("%i",&height);
@@ -153,12 +155,9 @@ int main()
                     if(state[i][j]==end[i][j])
                     {
                         flag++;
-                        //if(flag==lim)
-                            //printf("Iguales \n");
                     }
                     else
                     {
-                        //printf("No iguales \n");
                         i=height;
                         j=width;
                         flag=1;
@@ -185,7 +184,10 @@ int main()
                                     {
                                         if(state[i][j]==end[x][y])
                                         {
-                                            printf("(%i, %i);",j,y);
+                                            cost=cost+1+abs(j-y);
+                                            coord[k]=j;
+                                            coord[k+1]=y;
+                                            k=k+2;
                                             state[x][y]=end[x][y];
                                             state[i][j]='-';
                                             i=-1;
@@ -208,7 +210,10 @@ int main()
                                         {
                                             if(end[i][j]==state[x][y])
                                             {
-                                                printf("(%i, %i);",y,j);
+                                                cost=cost+1+abs(j-y);
+                                                coord[k]=j;
+                                                coord[k+1]=y;
+                                                k=k+2;
                                                 state[i][j]=end[i][j];
                                                 state[x][y]='-';
                                                 i=-1;
@@ -224,6 +229,13 @@ int main()
                     }
                 }
             }
+        }
+        printf("%i\n",cost);
+        for(k=0;k<strlen(coord);k=k+2)
+        {
+            printf("(%i, %i)",coord[k],coord[k+1]);
+            if(coord[k+2]!=NULL)
+                printf(";");
         }
     }
     else
