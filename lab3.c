@@ -5,6 +5,8 @@
 int main()
 {
     int i,j;
+    int lim;flag=0,rep=0;
+    int x,y;
     int a=0,b=0;
     int c=0,d=0;
     int height,width;
@@ -22,9 +24,7 @@ int main()
     for(i=0;i<b;i++)
     {
         if(initial[i]==59)
-        {
             a++;
-        }
     }
     width=a+1;
     
@@ -36,9 +36,7 @@ int main()
     for(i=0;i<height;i++)
     {
         for(j=0;j<width;j++)
-        {
             state[i][j]=45;
-        }
     }
     
     for(i=0;i<b;i++)
@@ -68,18 +66,14 @@ int main()
     for(i=0;i<height;i++)
     {
         for(j=0;j<width;j++)
-        {
             printf("%c \t",state[i][j]);
-        }
         printf("\n");
     }
     
     for(i=0;i<height;i++)
     {
         for(j=0;j<width;j++)
-        {
             end[i][j]=45;
-        }
     }
     
     for(i=0;i<c;i++)
@@ -109,16 +103,67 @@ int main()
     for(i=0;i<height;i++)
     {
         for(j=0;j<width;j++)
-        {
             printf("%c \t",end[i][j]);
-        }
         printf("\n");
     }
     
-    if(state[0][1]==end[0][1])
+    /*if(state[0][1]==end[0][1])
         printf("Iguales");
     else
-        printf("Diferentes");
+        printf("Diferentes");*/
+    
+    lim=height*width    
+        
+    while(flag!=lim)
+    {
+        for(i=0;i<height;i++)
+        {
+            for(j=0;j<width;j++)
+            {
+                if(state[i][j]==end[i][j])
+                    flag++;
+                else
+                {
+                    i=height;
+                    j=width;
+                    flag=0;
+                    rep=1;
+                }
+            }
+            printf("\n");
+        }
+        
+        while(rep=1)
+        {
+            for(j=0;j<width;j++)
+            {
+                for(i=0;i<height;i++)
+                {
+                    if(state[i][j]!=end[i][j])
+                    {
+                        x=i;
+                        y=j;
+                        for(j=0;j<width;j++)
+                        {
+                            for(i=height-1;i>=0;i--)
+                            {
+                                if(end[i][j]==state[x][y]&&end[i][j]=='-')
+                                {
+                                    state[i][j]=end[i][j];
+                                    state[x][y]='-';
+                                    i=-1;
+                                    j=width;
+                                    rep=0;
+                                }
+                            }
+                        }
+                        i=x;
+                        j=y;
+                    }
+                }
+            }
+        }
+    }
     
     return(0);
 }
