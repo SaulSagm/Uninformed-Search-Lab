@@ -149,6 +149,7 @@ int main()
                             {
                                 if(end[i][j]==state[x][y]&&end[i][j]=='-')
                                 {
+                                    printf("(%i,%i);",y,j);
                                     state[i][j]=end[i][j];
                                     state[x][y]='-';
                                     i=-1;
