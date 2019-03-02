@@ -116,6 +116,9 @@ int main()
                             else
                                 if(goal[i]==68)
                                     end[row2][column2]='D';
+                                else
+                                    if(goal[i]==88)
+                                        end[row2][column2]='X';
         }
         
         for(i=0;i<height;i++)
@@ -126,33 +129,14 @@ int main()
         }
         
         lim=height*width;   
-
-        /*for(i=0;i<height;i++)
-        {
-            for(j=0;j<width;j++)
-            {
-                if(state[i][j]==end[i][j])
-                {
-                    flag++;
-                    printf("Iguales \n");
-                }
-                else
-                {
-                    i=height;
-                    j=width;
-                    printf("No iguales \n");
-                }
-            } 
-        }
-        printf("%i",flag);*/
-        
+           
         while(flag<lim)
         {
             for(i=0;i<height;i++)
             {
                 for(j=0;j<width;j++)
                 {
-                    if(state[i][j]==end[i][j])
+                    if(state[i][j]==end[i][j]||end[i][j]=='X')
                     {
                         flag++;
                     }
@@ -208,18 +192,21 @@ int main()
                                     {
                                         for(i=height-1;i>=0;i--)
                                         {
-                                            if(end[i][j]==state[x][y])
-                                            {
-                                                cost=cost+1+abs(j-y);
-                                                coord[k]=j;
-                                                coord[k+1]=y;
-                                                k=k+2;
-                                                state[i][j]=end[i][j];
-                                                state[x][y]='-';
+                                            if(end[i][j]=='X')
                                                 i=-1;
-                                                j=width;
-                                                rep=0;
-                                            }
+                                            else
+                                                if(end[i][j]==state[x][y])
+                                                {
+                                                    cost=cost+1+abs(j-y);
+                                                    coord[k]=j;
+                                                    coord[k+1]=y;
+                                                    k=k+2;
+                                                    state[i][j]=end[i][j];
+                                                    state[x][y]='-';
+                                                    i=-1;
+                                                    j=width;
+                                                    rep=0;
+                                                }
                                         }
                                     }
                                     i=x;
