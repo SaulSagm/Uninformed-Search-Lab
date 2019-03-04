@@ -46,8 +46,8 @@ int main()
     {
         width=a+1;
         
-        char *state[height][width];
-        char *end[height][width];
+        char state[height][width];
+        char end[height][width];
         row1=height-1;
         row2=height-1;
         
