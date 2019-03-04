@@ -68,25 +68,9 @@ int main()
                     column1++;
                 }
                 else
-                    if(initial[i]==65)
-                        state[row1][column1]='A';
-                    else
-                        if(initial[i]==66)
-                            state[row1][column1]='B';
-                        else
-                            if(initial[i]==67)
-                                state[row1][column1]='C';
-                            else
-                                if(initial[i]==68)
-                                    state[row1][column1]='D';
+                    if(initial[i]>64&&initial[i]<91)
+                        state[row1][column1]=initial[i];
         }
-        
-        /*for(i=0;i<height;i++)
-        {
-            for(j=0;j<width;j++)
-                printf("%c \t",state[i][j]);
-            printf("\n");
-        }*/
         
         for(i=0;i<height;i++)
         {
@@ -105,41 +89,11 @@ int main()
                     column2++;
                 }
                 else
-                    if(goal[i]==65)
-                        end[row2][column2]='A';
-                    else
-                        if(goal[i]==66)
-                            end[row2][column2]='B';
-                        else
-                            if(goal[i]==67)
-                                end[row2][column2]='C';
-                            else
-                                if(goal[i]==68)
-                                    end[row2][column2]='D';
-                                else
-                                    if(goal[i]==88)
-                                        end[row2][column2]='X';
+                    if(goal[i]>64&&goal[i]<91)
+                        end[row2][column2]=goal[i];
         }
         
-        /*for(i=0;i<height;i++)
-        {
-            for(j=0;j<width;j++)
-                printf("%c \t",end[i][j]);
-            printf("\n");
-        }*/
-        
         lim=height*width;   
-        
-        /*for(i=0;i<height;i++)
-        {
-            for(j=0;j<width;j++)
-            {
-                if(state[i][j]!=end[i][j])
-                    printf("Iguales \n");
-                else
-                    printf("No iguales \n");
-            }
-        }*/
         
         while(flag<lim)
         {
