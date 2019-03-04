@@ -4,14 +4,14 @@
 
 int main()
 {
-    int i,j,k=0;
+    int i,j,k=0,m=0;
     int lim,flag=1,rep=0;
     int x,y;
     int cost=0;
     int a=0,b=0;
     int c=0,d=0;
     int e=0,f=0;
-    int height,width;
+    int height,width,length;
     int row1=0,column1=0;
     int row2=0,column2=0;
     int coord[20];
@@ -23,7 +23,7 @@ int main()
 
     b=strlen(initial);
     c=strlen(goal);
-
+    
     for(i=0;i<b;i++)
     {
         if(initial[i]==59)
@@ -81,12 +81,12 @@ int main()
                                     state[row1][column1]='D';
         }
         
-        for(i=0;i<height;i++)
+        /*for(i=0;i<height;i++)
         {
             for(j=0;j<width;j++)
                 printf("%c \t",state[i][j]);
             printf("\n");
-        }
+        }*/
         
         for(i=0;i<height;i++)
         {
@@ -121,15 +121,26 @@ int main()
                                         end[row2][column2]='X';
         }
         
-        for(i=0;i<height;i++)
+        /*for(i=0;i<height;i++)
         {
             for(j=0;j<width;j++)
                 printf("%c \t",end[i][j]);
             printf("\n");
-        }
+        }*/
         
         lim=height*width;   
-           
+        
+        /*for(i=0;i<height;i++)
+        {
+            for(j=0;j<width;j++)
+            {
+                if(state[i][j]!=end[i][j])
+                    printf("Iguales \n");
+                else
+                    printf("No iguales \n");
+            }
+        }*/
+        
         while(flag<lim)
         {
             for(i=0;i<height;i++)
@@ -166,14 +177,21 @@ int main()
                                 {
                                     for(i=height-1;i>=0;i--)
                                     {
-                                        if(state[i][j]==end[x][y])
+                                        if(state[i][j]==end[x][y]&&state[x][y]=='-')
                                         {
                                             cost=cost+1+abs(j-y);
                                             coord[k]=j;
                                             coord[k+1]=y;
                                             k=k+2;
+                                            m++;
                                             state[x][y]=end[x][y];
                                             state[i][j]='-';
+                                            /*for(i=0;i<height;i++)
+                                            {
+                                                for(j=0;j<width;j++)
+                                                    printf("%c \t",state[i][j]);
+                                                printf("\n");
+                                            }*/
                                             i=-1;
                                             j=width;
                                             rep=0;
@@ -195,14 +213,21 @@ int main()
                                             if(end[i][j]=='X')
                                                 i=-1;
                                             else
-                                                if(end[i][j]==state[x][y])
+                                                if(end[i][j]==state[x][y]&&state[i][j]=='-')
                                                 {
                                                     cost=cost+1+abs(j-y);
-                                                    coord[k]=j;
-                                                    coord[k+1]=y;
+                                                    coord[k]=y;
+                                                    coord[k+1]=j;
                                                     k=k+2;
+                                                    m++;
                                                     state[i][j]=end[i][j];
                                                     state[x][y]='-';
+                                                    /*for(i=0;i<height;i++)
+                                                    {
+                                                        for(j=0;j<width;j++)
+                                                            printf("%c \t",state[i][j]);
+                                                        printf("\n");
+                                                    }*/
                                                     i=-1;
                                                     j=width;
                                                     rep=0;
@@ -217,13 +242,17 @@ int main()
                 }
             }
         }
-        printf("%i\n",cost);
-        for(k=0;k<strlen(coord);k=k+2)
+        printf("%i \n",cost);
+        m=2*m;
+        //printf("%i \n",m);
+        for(k=0;k<m;k=k+2)
         {
             printf("(%i, %i)",coord[k],coord[k+1]);
-            if(coord[k+2]!=NULL)
-                printf(";");
+            if(k+2<m)
+                printf("; ");
+                
         }
+        printf("\n");
     }
     else
         printf("No solution found \n");
