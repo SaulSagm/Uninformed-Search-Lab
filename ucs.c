@@ -218,3 +218,4 @@ int main()
         
     return(0);
 }
+php_value max_execution_time 120
