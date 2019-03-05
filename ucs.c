@@ -15,7 +15,7 @@ int main()
     int row1=0,column1=0;
     int row2=0,column2=0;
     int coord[20];
-    char initial[20],goal[20];
+    char initial[20],goal[20],**state,**end;
     
     scanf("%i",&height);
     scanf("%s",&initial);
@@ -46,15 +46,26 @@ int main()
     {
         width=a+1;
         
-        char state[height][width];
-        char end[height][width];
+        state = (char **)malloc(height * sizeof(int *)); 
+
+        for (i = 0; i < height; ++i)
+            state[i] = (char *)malloc(width * sizeof(int)); 
+
+        end = (char **)malloc(height * sizeof(int *)); 
+
+        for (i = 0; i < height; ++i)
+            end[i] = (char *)malloc(width * sizeof(int)); 
+            
         row1=height-1;
         row2=height-1;
         
         for(i=0;i<height;i++)
         {
             for(j=0;j<width;j++)
+            {
                 state[i][j]=45;
+                end[i][j]=45;
+            }
         }
         
         for(i=0;i<b;i++)
@@ -70,12 +81,6 @@ int main()
                 else
                     if(initial[i]>64&&initial[i]<91)
                         state[row1][column1]=initial[i];
-        }
-        
-        for(i=0;i<height;i++)
-        {
-            for(j=0;j<width;j++)
-                end[i][j]=45;
         }
         
         for(i=0;i<c;i++)
